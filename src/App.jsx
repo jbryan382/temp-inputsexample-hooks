@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Slider from './components/Slider';
 
 export function App() {
+  // We are storing data here
   const [temp, setTemp] = useState(0);
   const [maxTemp, setMaxTemp] = useState(Math.floor(Math.random() * 100));
 
@@ -21,6 +22,19 @@ export function App() {
   function convertC() {
     return temp - 273.15
   }
+
+  function handleClassName() {
+    if (temp / maxTemp < .25) {
+      return 'fa-thermometer-quarter'
+    }
+    if (temp / maxTemp < .5) {
+      return 'fa-thermometer-half'
+    }
+    if (temp / maxTemp < .75) {
+      return 'fa-thermometer-three-quarters'
+    }
+    return 'fa-thermometer-full'
+  }
   return (
     <>
       <main>
@@ -34,6 +48,7 @@ export function App() {
           <label> Change Max Temp:
             <input type="text" onChange={updateMaxTemp} />
           </label>
+          <i className={`fas ${handleClassName()}`}></i>
           <h3>Your Current Temperature:</h3>
           <ul>
             <li>{temp}°K</li>
